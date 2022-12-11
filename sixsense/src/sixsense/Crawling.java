@@ -10,6 +10,8 @@ public class Crawling {
 		//승률 추가
 		System.out.println("Hello KLS");
 		//이슬 추가
+		System.out.println("Hello SMS");
+		//민성 추가.
 	}
 	
 }
