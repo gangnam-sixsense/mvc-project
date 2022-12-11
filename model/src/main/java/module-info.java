@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author sonminseong
- *
- */
-module model {
-}
