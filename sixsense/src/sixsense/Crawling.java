@@ -13,6 +13,7 @@ public class Crawling {
 		System.out.println("Hello SMS");
 		//민성 추가.
 		System.out.println("형진씨기다리는중");
+		//언제오세요?
 	}
 	
 }
