@@ -6,6 +6,8 @@ public class Crawling {
 		
 		System.out.println("Hello World!");
 		//커밋했어요
+		System.out.println("Hello LSY");
+		//승률 추가
 		
 	}
 	
