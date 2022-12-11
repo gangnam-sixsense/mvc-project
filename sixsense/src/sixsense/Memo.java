@@ -1,6 +1,6 @@
 package sixsense;
 
-public class Crawling {
+public class Memo {
 
 	public static void main(String[] args) {
 		
