@@ -8,7 +8,8 @@ public class Crawling {
 		//커밋했어요
 		System.out.println("Hello LSY");
 		//승률 추가
-		
+		System.out.println("Hello KLS");
+		//이슬 추가
 	}
 	
 }
