@@ -16,6 +16,8 @@ public class Memo {
 		//한빛 추가.
 		System.out.println("형진씨기다리는중");
 		//언제오세요?
+		System.out.println("형진 등장");
+
 		
 	}
 	
