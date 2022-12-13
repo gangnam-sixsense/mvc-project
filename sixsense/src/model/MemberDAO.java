@@ -14,7 +14,7 @@ public class MemberDAO {
 		for(int i=0; i<mvo.size(); i++) { //리스트 size만큼 돌아서 
 			if(mvo.get(i).getID().equals(vo.getID())) { //id가 이미 저장된 VO에 있으면 false
 				System.out.println("로그: 아이디 중복이에요.");//개발자만 볼 수 있는 로그
-				return false; // false를 리턴해준다.
+				return false; // false를 리턴해준다.//???
 			}
 		}
 		MemberVO data=new MemberVO();  //일회용.
