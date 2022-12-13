@@ -54,11 +54,15 @@ public class ScheduleDAO {
 					System.out.println("로그: 메모가 변경되었습니다."); //개발자만이 볼 수 있는 로그.
 					return true; //true 리턴해준다.
 				}else if(vo.getYear() != 0) { //년이 0이 아니라면.
-					svo.get(i).setYear(vo.getYear()); //년을 바꿔주고.
-					svo.get(i).setMonth(vo.getMonth());  // 달을 바꿔주고.
-					svo.get(i).setDay(vo.getDay()); //일을 바꿔준다.
-					System.out.println("로그: 날짜가 변경되었습니다."); //개발자만이 볼 수 있는 로그.
-					return true; //true를 리턴해준다.
+					if(vo.getMonth() !=0) { //달이 0이 아니라면.
+						if(vo.getDay() !=0) { //일이 0이 아니라면.
+							svo.get(i).setYear(vo.getYear()); //년을 바꿔주고.
+							svo.get(i).setMonth(vo.getMonth());  // 달을 바꿔주고.
+							svo.get(i).setDay(vo.getDay()); //일을 바꿔준다.
+							System.out.println("로그: 날짜가 변경되었습니다."); //개발자만이 볼 수 있는 로그.
+							return true; //true를 리턴해준다.
+						}
+					}
 				}
 			}
 		}
