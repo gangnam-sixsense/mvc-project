@@ -15,6 +15,8 @@ public class Memo {
 		System.out.println("Hello KHB");
 		//한빛 추가.
 		System.out.println("형진씨기다리는중");
+		// 지민 추가.
+		System.out.println("Hello kjm");
 		//언제오세요?
 		System.out.println("형진 등장");
 
