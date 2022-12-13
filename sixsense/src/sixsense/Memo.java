@@ -12,8 +12,17 @@ public class Memo {
 		//이슬 추가
 		System.out.println("Hello SMS");
 		//민성 추가.
+		System.out.println("Hello KHB");
+		//한빛 추가.
 		System.out.println("형진씨기다리는중");
+		// 지민 추가.ㅇㅇ
+		System.out.println("Hello kjm");
 		//언제오세요?
+		System.out.println("형진 등장");
+		//언제오세요?
+		System.out.println("최종테스트");
+		System.out.println("dddddd");
+		
 	}
 	
 }
