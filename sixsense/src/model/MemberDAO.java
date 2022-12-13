@@ -23,7 +23,8 @@ public class MemberDAO {
 		data.setPw(vo.getPw()); //MemberVO의 비밀번호를 설정해준다.
 		mvo.add(vo);
 		System.out.println("로그: 회원가입 성공!"); // 개발자만 볼 수 있는 로그.
-		return true; //같은 아이디가 존재하지 않다면 true 반환
+		return true; //같은 아이디가 존재하지 않다면 true 반환 
+		//ㄴ???
 	}
 	//R
 	public MemberVO hasMember(MemberVO vo) {// 로그인 로직
