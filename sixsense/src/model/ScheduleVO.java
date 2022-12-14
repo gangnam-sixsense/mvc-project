@@ -6,7 +6,7 @@ public class ScheduleVO {
 	private int month; //달.
 	private int day; //일.
 	private int highTemperature; //최고기온.
-	private int LowTemperature; //최저기온.
+	private int lowTemperature; //최저기온.
 	private int maxRainfall; //최대 강우량.
 	private int minRainfall; //최소 강우량.
 	private String memo;
@@ -34,8 +34,8 @@ public class ScheduleVO {
 	public String getID() {
 		return ID;
 	}
-	public void setID(String iD) {
-		ID = iD;
+	public void setID(String ID) {
+		this.ID = ID;
 	}
 	public int getYear() {
 		return year;
@@ -62,10 +62,10 @@ public class ScheduleVO {
 		this.highTemperature = highTemperature;
 	}
 	public int getLowTemperature() {
-		return LowTemperature;
+		return lowTemperature;
 	}
 	public void setLowTemperature(int lowTemperature) {
-		LowTemperature = lowTemperature;
+		this.lowTemperature = lowTemperature;
 	}
 	public int getMaxRainfall() {
 		return maxRainfall;
