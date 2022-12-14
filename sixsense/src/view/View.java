@@ -388,4 +388,32 @@ public class View {
 	public void printFalse() {
 		System.out.println("실패하였습니다.");
 	}
+	//---------------------------------------------------------------------------------
+	// 관리자 메뉴
+	public int admineMenu() {  //로그인후 회원 메뉴 출력
+		int act;
+		while(true) {
+			try {
+				System.out.println();
+				System.out.println("==== 관리자 메뉴 ====");
+				System.out.println("1. 일정출력");
+				System.out.println("2. 일정삭제");
+				System.out.println("3. 로그아웃");
+				System.out.print("   :::   ");
+				act = sc.nextInt();
+			} catch(Exception e) {
+				sc.nextLine(); //에러값을 먹어준다
+				System.out.println("정수를 다시 입력해주세요");
+				continue;
+			}
+			if(1<=act && act <=3) {
+				break;
+			}
+			System.out.println("범위를 확인하고 다시 입력해주세요");
+		}
+		return act;
+	}
+	
+	
+	
 }
