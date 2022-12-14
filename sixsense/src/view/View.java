@@ -274,7 +274,7 @@ public class View {
 
 	/////////////////////////////////////////////////////////////////////////////////
 	//// 일정 전체 출력 로직
-	public void selectAll(ArrayList<modelVO/**/>datas) {
+	public void selectAll(ArrayList<MemberVO/**/>datas) {
 		if(datas==null) {
 			/*전체 출력*/
 			for(int i=0;i<=datas.length();i++) {
@@ -294,7 +294,7 @@ public class View {
 
 	///////////////////////////////////////////////////////////////////////////////
 	//// 변경할 일정 변경 로직
-	public <dailyVO/**/> changeDiary(ArrayList<modelVO/**/>datas) {
+	public <ScheduleVO/**/> changeDiary(ArrayList<MemberVO/**/>datas) {
 
 		System.out.println("변경하실 일정번호를 입력해주세요");
 		System.out.print("입력 : ");
@@ -332,7 +332,7 @@ public class View {
 
 	////////////////////////////////////////////////////////////
 	/// 일정 삭제 로직
-	public int deletNum(ArrayList<modelVO/**/>datas) {
+	public int deletNum(ArrayList<MemberVO/**/>datas) {
 		System.out.println("삭제하실 일정번호를 입력해주세요");
 		System.out.print("입력 : ");
 		int num;
@@ -390,7 +390,7 @@ public class View {
 	}
 	//---------------------------------------------------------------------------------
 	// 관리자 메뉴
-	public int admineMenu() {  //로그인후 회원 메뉴 출력
+	public int adminMenu() {  //로그인후 회원 메뉴 출력
 		int act;
 		while(true) {
 			try {
