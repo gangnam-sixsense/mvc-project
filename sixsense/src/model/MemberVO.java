@@ -1,11 +1,10 @@
 package model;
 
-import java.util.ArrayList;
 
 public class MemberVO {
 	private String ID; //PK
-	private String pw;
-	private String name;
+	private String pw; //비밀번호.
+	private String name; //이름.
 	//ArrayList<ScheduleVO> sArrayList ;
 	public String getID() {
 		return ID;

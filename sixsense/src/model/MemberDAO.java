@@ -55,17 +55,19 @@ public class MemberDAO {
 				}
 			}
 		}
-		System.out.println("로그: 아이디가 없습니다."); //개발자만 볼 수 있는 로그.
+		System.out.println("로그: 아이디가 없습니다.(정보변경실팽)"); //개발자만 볼 수 있는 로그.
 		return false; //id가 없다면 false를 반환한다.
 	}
 	//D
 	public boolean isDeleteMember(MemberVO vo) { // 회원 탈퇴.
 		for(int i=0; i<mvo.size(); i++) { //리스트size만큼 돌아서.
-			if(mvo.get(i).getPw().equals(vo.getPw())) { //비밀번호가 맞다면 if문 실행
+			if(mvo.get(i).getID().equals(vo.getID())) { //비밀번호가 맞다면 if문 실행
 				mvo.remove(i);  //삭제.
+				System.out.println("로그: 회퉌 탈퇴 됐습니다."); //개발자만 볼 수 있는 로그.
 				return true; //true 반환
 			}
 		}
+		System.out.println("로그: 아이디가 존재하지 않습니다.(회원탈퇴)"); //개발자만 볼 수 있는 로그.
 		return false; // 같은 아이디가 존재하지 않다면 false 반환
 	}
 }
