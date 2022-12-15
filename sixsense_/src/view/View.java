@@ -290,7 +290,7 @@ public class View {
 
 		System.out.println("일정을 입력해 주세요.");
 		System.out.print("입력 : ");
-//		sc.nextLine();<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>
+		sc.nextLine();
 		String dia= sc.nextLine();
 		return dia;
 	}
@@ -336,43 +336,6 @@ public class View {
 		}
 		return emoji;
 	}
-
-
-//	public void selectAll(ArrayList<ScheduleVO> datas) {
-//		if(datas.isEmpty()) {
-//			System.out.println("아직 일정이 없습니다.");
-//		}
-//		/*전체 출력*/
-//		for(int i=0;i<datas.size();i++) {
-//
-//			if(!datas.get(i).getLowTemperature().isEmpty()) {
-//
-//				if(datas.get(i).getMinRainfall().isEmpty()) {
-//					datas.get(i).setMinRainfall("0");
-//				}
-//				if(datas.get(i).getMaxRainfall().isEmpty()) {
-//					datas.get(i).setMaxRainfall("0");
-//				}
-//
-//				ArrayList<String> amList = new ArrayList<>(Arrays.asList(datas.get(i).getMinRainfall().split("%")));
-//				ArrayList<String> pmList = new ArrayList<>(Arrays.asList(datas.get(i).getMaxRainfall().split("%")));
-//				int amRain=Integer.parseInt(amList.get(0));
-//				int pmRain=Integer.parseInt(pmList.get(0));
-//				String amEmoji = getEmoji(amRain);
-//				String pmEmoji = getEmoji(pmRain);
-//
-//
-//				//i. 월/일 어디어디어디어디 일정 날씨
-//				System.out.println((i+1)+". "+datas.get(i).getMonth() +"/"+datas.get(i).getDay()+"  일정:"+datas.get(i).getMemo()+"  날씨:"
-//						+datas.get(i).getLowTemperature()+" / "+datas.get(i).getHighTemperature()+"  오전:"+amEmoji
-//						+"  오후:"+pmEmoji);
-//			}
-//			else {
-//				System.out.println((i+1)+". "+datas.get(i).getMonth() +"/"+datas.get(i).getDay()+"  일정:"+datas.get(i).getMemo()+"  날씨정보없음");
-//			}			
-//		}
-//	}
-//
 	public boolean selectAll(ArrayList<ScheduleVO> datas) {
 		if(datas.isEmpty()) {
 			System.out.println("아직 일정이 없습니다.");
@@ -440,7 +403,7 @@ public class View {
 		int pk=datas.get(num-1).getpNum();
 
 		System.out.println("변경하실 일정을 입력해 주세요");
-		//넥스트라인먹여주기<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+		sc.nextLine();
 		String dia=sc.nextLine();
 		
 

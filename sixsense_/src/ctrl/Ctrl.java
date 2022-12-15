@@ -56,15 +56,17 @@ public class Ctrl {
 						}
 						else if(act==2){ // 2. 일정삭제
 							ScheduleVO svo=new ScheduleVO();
-							view.selectAll(sdao.loadSchedules(null)); // 일정전체목록출력
-							// 일정 전체 목록을 뷰에게 넘겨주고
-							// 반환된 pk값을(삭제할 일정) 세팅 - sdao의 삭제메서드로 svo넘겨줌
-							svo.setpNum(view.deleteNum(sdao.loadSchedules(null)));   
-							if(sdao.isDeleteSchedule(svo)) { // 삭제 성공한다면
-								view.printTrue(); // 성공멘트출력
-							}
-							else {
-								view.printFalse(); // 실패멘트출력
+
+							if(view.selectAll(sdao.loadSchedules(null))) { // 일정전체목록출력
+								// 일정 전체 목록을 뷰에게 넘겨주고
+								// 반환된 pk값을(삭제할 일정) 세팅 - sdao의 삭제메서드로 svo넘겨줌
+								svo.setpNum(view.deleteNum(sdao.loadSchedules(null)));   
+								if(sdao.isDeleteSchedule(svo)) { // 삭제 성공한다면
+									view.printTrue(); // 성공멘트출력
+								}
+								else {
+									view.printFalse(); // 실패멘트출력
+								}
 							}
 						}
 						else if(act==3) { // 3. 로그아웃
@@ -74,82 +76,85 @@ public class Ctrl {
 						}
 					}
 				}
-				//////////////ㄷelseㄷ문으로 회원로그인묶어주기<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-				// 회원로그인
-				while(true){ 
-					// 로그인성공시
-					act=view.printMenu();
-					if(act==1){ // 1. 일정추가
-						ScheduleVO svo=new ScheduleVO(); // 모델에 인자로 넘길 svo 객체화
-						svo.setYear(view.year()); // 년도 입력받아서 세팅
-						svo.setMonth(view.mon(svo.getYear())); // 월 입력받아서 세팅
-						svo.setDay(view.day(svo.getYear(),svo.getMonth())); // 일 입력받아서 세팅
+				else {
+					//////////////ㄷelseㄷ문으로 회원로그인묶어주기<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+					// 회원로그인
+					while(true){ 
+						// 로그인성공시
+						act=view.printMenu();
+						if(act==1){ // 1. 일정추가
+							ScheduleVO svo=new ScheduleVO(); // 모델에 인자로 넘길 svo 객체화
+							svo.setYear(view.year()); // 년도 입력받아서 세팅
+							svo.setMonth(view.mon(svo.getYear())); // 월 입력받아서 세팅
+							svo.setDay(view.day(svo.getYear(),svo.getMonth())); // 일 입력받아서 세팅
 
-						svo.setID(mvo.getID()); // 회원ID를 일정vo에 FK로 세팅
-						svo.setMemo(view.diary()); // 일정추가
+							svo.setID(mvo.getID()); // 회원ID를 일정vo에 FK로 세팅
+							svo.setMemo(view.diary()); // 일정추가
 
-						// 크롤링에서 구리스트 반환 - 뷰에서 출력, 선택, 세팅
-						// 세팅된 구를 크롤링 동에 넘겨주고 - 동 리스트 반환 - 뷰에서 출력, 선택 - 선택된 동 세팅
-						svo.setGu(view.gu(crawling.getGu())); // 구 저장 
-						svo.setDong(view.dong(crawling.getDong(svo.getGu())));
-						// 스케줄리스트를 가지고있는 객체과 일정세팅된 객체 크롤링으로 보냄 -크롤링에서 dao로 전달
-						crawling.setWeather(sdao ,svo); // 세팅된 객체를 크롤링으로 보냄
+							// 크롤링에서 구리스트 반환 - 뷰에서 출력, 선택, 세팅
+							// 세팅된 구를 크롤링 동에 넘겨주고 - 동 리스트 반환 - 뷰에서 출력, 선택 - 선택된 동 세팅
+							svo.setGu(view.gu(crawling.getGu())); // 구 저장 
+							svo.setDong(view.dong(crawling.getDong(svo.getGu())));
+							// 스케줄리스트를 가지고있는 객체과 일정세팅된 객체 크롤링으로 보냄 -크롤링에서 dao로 전달
+							crawling.setWeather(sdao ,svo); // 세팅된 객체를 크롤링으로 보냄
 
-					}
+						}
 
-					else if(act==2){ //2.전체 일정 출력
-						// 로그인한 mvo넘겨주고 해당 회원의 일정리스트를 뷰에게 전달후 출력 
-						view.selectAll(sdao.loadSchedules(mvo));
-					}
-					else if(act==3){ //3.일정 변경
-						// 로그인한 mvo넘겨주고 해당 회원의 일정리스트를 뷰에게 전달후 출력 
-						if(view.selectAll(sdao.loadSchedules(mvo))) {
-							// sdao에서 회원의 일정리스트를 뷰에게 전달 - 변경할 일정을 sdao에 전달 - 변경 
-							if(sdao.isModifySchedule(view.changeDiary(sdao.loadSchedules(mvo)))) { // 변경성공한다면
-								view.printTrue(); // 성공멘트출력
+						else if(act==2){ //2.전체 일정 출력
+							// 로그인한 mvo넘겨주고 해당 회원의 일정리스트를 뷰에게 전달후 출력 
+							view.selectAll(sdao.loadSchedules(mvo));
+						}
+						else if(act==3){ //3.일정 변경
+							// 로그인한 mvo넘겨주고 해당 회원의 일정리스트를 뷰에게 전달후 출력 
+							if(view.selectAll(sdao.loadSchedules(mvo))) {
+								// sdao에서 회원의 일정리스트를 뷰에게 전달 - 변경할 일정을 sdao에 전달 - 변경 
+								if(sdao.isModifySchedule(view.changeDiary(sdao.loadSchedules(mvo)))) { // 변경성공한다면
+									view.printTrue(); // 성공멘트출력
+								}
+								else {
+									view.printFalse(); // 실패멘트출력
+								}
 							}
-							else {
-								view.printFalse(); // 실패멘트출력
+							//						view.printFalse(); // 실패멘트출력
+						}
+
+						else if(act==4){ //4.일정 삭제
+
+							ScheduleVO svo=new ScheduleVO(); // 모델에 인자로 넘길 svo 객체화
+							// 로그인한 mvo넘겨주고 해당 회원의 일정리스트를 뷰에게 전달후 출력 
+							if(view.selectAll(sdao.loadSchedules(mvo))) {
+								// sdao에서 회원의 일정리스트를 뷰에게 전달 - 삭제할 일정pk 세팅
+								svo.setpNum(view.deleteNum(sdao.loadSchedules(mvo)));
+								//                  System.out.println(view.deleteNum(sdao.loadSchedules(mvo)));
+								if(sdao.isDeleteSchedule(svo)) { // 해당 일정 삭제 성공한다면
+									view.printTrue(); // 성공멘트출력
+								}
+								else {
+									view.printFalse(); // 실패멘트출력
+								}
 							}
 						}
-						//						view.printFalse(); // 실패멘트출력
-					}
-
-					else if(act==4){ //4.일정 삭제
-
-						ScheduleVO svo=new ScheduleVO(); // 모델에 인자로 넘길 svo 객체화
-						// 로그인한 mvo넘겨주고 해당 회원의 일정리스트를 뷰에게 전달후 출력 
-						if(view.selectAll(sdao.loadSchedules(mvo))) {
-							// sdao에서 회원의 일정리스트를 뷰에게 전달 - 삭제할 일정pk 세팅
-							svo.setpNum(view.deleteNum(sdao.loadSchedules(mvo)));
-							//                  System.out.println(view.deleteNum(sdao.loadSchedules(mvo)));
-							if(sdao.isDeleteSchedule(svo)) { // 해당 일정 삭제 성공한다면
-								view.printTrue(); // 성공멘트출력
-							}
-							else {
-								view.printFalse(); // 실패멘트출력
-							}
-						}
-					}
-					else if(act==5) { // 5. 회원변경
-						if(mdao.isModifyMember(view.updateMember(mvo))) {
-							view.printTrue();
-							break;
-						}
-						view.printFalse();
-
-					}
-					else if(act==6) { // 5. 회원탈퇴
-						if(view.getCheck(mvo)) {
-							if(mdao.isDeleteMember(mvo)) {
+						else if(act==5) { // 5. 회원변경
+							if(mdao.isModifyMember(view.updateMember(mvo))) {
 								view.printTrue();
 								break;
 							}
-						} 
-						view.printFalse();
-					}
-					else{
-						break; // 로그인반복문 탈출하고 메인메뉴로
+							view.printFalse();
+
+						}
+						else if(act==6) { // 5. 회원탈퇴
+							if(view.getCheck(mvo)) {
+								if(mdao.isDeleteMember(mvo)) {
+									sdao.deleteSchedule(mvo);
+									view.printTrue();
+									break;
+								}
+							} 
+							view.printFalse();
+						}
+						else{
+							break; // 로그인반복문 탈출하고 메인메뉴로
+						}
 					}
 				}
 			}
