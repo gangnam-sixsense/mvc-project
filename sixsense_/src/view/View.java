@@ -2,6 +2,7 @@ package view;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import model.MemberVO;
 import model.ScheduleVO;
@@ -20,20 +21,23 @@ public class View {
 		int act;
 		while(true){
 			try{
-				System.out.println("메인 출력");
-				System.out.println("1. 로그인");
-				System.out.println("2. 회원가입");
-				System.out.println("3. 종료");
+				System.out.println("❤🚗❤🚅❤🛴❤✈❤🍕❤🍖❤🍔❤🎈❤🍕❤");
+				System.out.println("==========스케쥴 관리 시스템==========");
+				System.out.println("1.   로그인");
+				System.out.println("2.   회원가입");
+				System.out.println("3.   종료");
+				System.out.println("=================================");
+				System.out.println("❤🚗❤🚅❤🛴❤✈❤🍕❤🍖❤🍔❤🎈❤🍕❤");
 				act = sc.nextInt();
 			}catch(Exception e){
 				sc.nextLine();
-				System.out.println("정수 입력");
+				System.out.println("1~3 범위로 입력해주세요.");
 				continue;
 			}
 			if(1<=act && act <=3){
 				break;
 			}
-			System.out.println("범위 확인");
+			System.out.println("1~3 범위로 입력해주세요.");
 		}
 		return act;
 	}
@@ -83,7 +87,7 @@ public class View {
 	// 회원가입 로그인 성공
 	public void joinTure() {
 		System.out.println("회원가입 성공되었습니다.");
-		System.out.println("로그인 해주세요~");
+		System.out.println("로그인 해주세요~❤❤❤❤❤");
 	}
 
 	//////////////////////////////////////////////////////
@@ -102,7 +106,10 @@ public class View {
 	//---------------------------------------------------------------------------------------------
 	//로그인 성공 로직
 	public void loginTure(MemberVO vo) {
-		System.out.println(vo.getName()+"님 로그인에 성공하셨습니다.");
+		System.out.println();
+		System.out.println();
+		System.out.println(vo.getName()+"님 로그인에 성공하셨습니다❤❤❤");
+
 	}
 
 	//------------------------------------------------------------------------------------
@@ -112,24 +119,30 @@ public class View {
 		while(true) {
 			try {
 				System.out.println();
+
+				System.out.println();
+				System.out.println();
+				System.out.println("❤🚗❤🚅❤🛴❤✈❤🍕❤🍖❤🍔❤🎈❤🍕❤");
 				System.out.println("====  회원 메뉴 ====");
 				System.out.println("1. 일정추가");
 				System.out.println("2. 일정출력");
 				System.out.println("3. 일정변경");
 				System.out.println("4. 일정삭제");
-				System.out.println("5. 회원탈퇴");
-				System.out.println("6. 로그아웃");
+				System.out.println("5. 정보변경");
+				System.out.println("6. 회원탈퇴");
+				System.out.println("7. 로그아웃");
+				System.out.println("❤🚗❤🚅❤🛴❤✈❤🍕❤🍖❤🍔❤🎈❤🍕❤");
 				System.out.print("   :::   ");
 				act = sc.nextInt();
 			} catch(Exception e) {
 				sc.nextLine(); //에러값을 먹어준다
-				System.out.println("정수를 다시 입력해주세요");
+				System.out.println("1~7 범위내로 입력해주세요.");
 				continue;
 			}
-			if(1<=act && act <=6) {
+			if(1<=act && act <=7) {
 				break;
 			}
-			System.out.println("범위를 확인하고 다시 입력해주세요");
+			System.out.println("1~7 범위내로 입력해주세요.");
 		}
 		return act;
 	}
@@ -194,7 +207,7 @@ public class View {
 			try {
 				mon=sc.nextInt();
 			}catch (Exception e) {
-				System.out.println("정확한 월 입력해주세요.");
+				System.out.println("1~12 사이를 입력해주세요.");
 				continue;
 			}
 			if(mon<1 || mon>12 ) {
@@ -204,7 +217,7 @@ public class View {
 			if(year==now.getYear()) {
 				//현재 월보다작으면 과거이니 다시입력.
 				if(mon<now.getMonthValue()) {
-					System.out.println("과거 월은 입력 하실수없습니다.");
+					System.out.println("지난 달은 입력하실 수 없습니다.");
 					continue;
 				}
 			}
@@ -233,7 +246,7 @@ public class View {
 					continue;
 				}
 				if(year==now.getYear() && mon==now.getMonthValue()&& day<now.getDayOfMonth()) {
-					System.out.println("과거일자는 입력 할수없습니다.");
+					System.out.println("지난 일자는 입력하실 수 없습니다.");
 					continue;					
 				}
 				else {
@@ -246,7 +259,7 @@ public class View {
 					continue;
 				}
 				if(year==now.getYear() && mon==now.getMonthValue()&& day<now.getDayOfMonth()) {
-					System.out.println("과거일자는 입력 할수없습니다.");
+					System.out.println("지난 일자는 입력하실 수 없습니다.");
 					continue;					
 				}
 				else {
@@ -259,7 +272,7 @@ public class View {
 					continue;
 				}
 				if(year==now.getYear() && mon==now.getMonthValue()&& day<now.getDayOfMonth()) {
-					System.out.println("과거일자는 입력 할수없습니다.");
+					System.out.println("지난 일자는 입력하실 수 없습니다.");
 					continue;					
 				}
 				else {
@@ -273,9 +286,12 @@ public class View {
 	////////////////////////////////////////////////////
 	/// 일정 입력 로직
 	public String diary() {
-		System.out.println("일정을 입력해 주세요");
-		System.out.print("입력");
-		String dia= sc.next();
+		System.out.println();
+
+		System.out.println("일정을 입력해 주세요.");
+		System.out.print("입력 : ");
+//		sc.nextLine();<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>
+		String dia= sc.nextLine();
 		return dia;
 	}
 	//////////////////////////////////////
@@ -283,7 +299,7 @@ public class View {
 	public int deleteNum(ArrayList<ScheduleVO> datas) {//인자필요 일정객체배열리스트
 		int num;
 		while(true) {
-			System.out.println("삭제하실 일정을 입력해주세요");
+			System.out.println("삭제하실 일정을 입력해주세요.");
 			System.out.print("입력 : ");
 			try {
 				num = sc.nextInt();
@@ -306,21 +322,94 @@ public class View {
 
 	/////////////////////////////////////////////////////////////////////////////////
 	//// 일정 전체 출력 로직
-	public void selectAll(ArrayList<ScheduleVO> datas) {
+
+	public String getEmoji(int rain) {
+		String emoji = "";
+		if(rain<=30) {
+			emoji= "🌞";
+		}
+		else if(rain<=70) {
+			emoji="☁";
+		}
+		else {
+			emoji="🌧";
+		}
+		return emoji;
+	}
+
+
+//	public void selectAll(ArrayList<ScheduleVO> datas) {
+//		if(datas.isEmpty()) {
+//			System.out.println("아직 일정이 없습니다.");
+//		}
+//		/*전체 출력*/
+//		for(int i=0;i<datas.size();i++) {
+//
+//			if(!datas.get(i).getLowTemperature().isEmpty()) {
+//
+//				if(datas.get(i).getMinRainfall().isEmpty()) {
+//					datas.get(i).setMinRainfall("0");
+//				}
+//				if(datas.get(i).getMaxRainfall().isEmpty()) {
+//					datas.get(i).setMaxRainfall("0");
+//				}
+//
+//				ArrayList<String> amList = new ArrayList<>(Arrays.asList(datas.get(i).getMinRainfall().split("%")));
+//				ArrayList<String> pmList = new ArrayList<>(Arrays.asList(datas.get(i).getMaxRainfall().split("%")));
+//				int amRain=Integer.parseInt(amList.get(0));
+//				int pmRain=Integer.parseInt(pmList.get(0));
+//				String amEmoji = getEmoji(amRain);
+//				String pmEmoji = getEmoji(pmRain);
+//
+//
+//				//i. 월/일 어디어디어디어디 일정 날씨
+//				System.out.println((i+1)+". "+datas.get(i).getMonth() +"/"+datas.get(i).getDay()+"  일정:"+datas.get(i).getMemo()+"  날씨:"
+//						+datas.get(i).getLowTemperature()+" / "+datas.get(i).getHighTemperature()+"  오전:"+amEmoji
+//						+"  오후:"+pmEmoji);
+//			}
+//			else {
+//				System.out.println((i+1)+". "+datas.get(i).getMonth() +"/"+datas.get(i).getDay()+"  일정:"+datas.get(i).getMemo()+"  날씨정보없음");
+//			}			
+//		}
+//	}
+//
+	public boolean selectAll(ArrayList<ScheduleVO> datas) {
 		if(datas.isEmpty()) {
 			System.out.println("아직 일정이 없습니다.");
+			return false;
 		}
 		/*전체 출력*/
 		for(int i=0;i<datas.size();i++) {
+
 			if(!datas.get(i).getLowTemperature().isEmpty()) {
+
+				if(datas.get(i).getMinRainfall().isEmpty()) {
+					datas.get(i).setMinRainfall("0");
+				}
+				if(datas.get(i).getMaxRainfall().isEmpty()) {
+					datas.get(i).setMaxRainfall("0");
+				}
+
+				ArrayList<String> amList = new ArrayList<>(Arrays.asList(datas.get(i).getMinRainfall().split("%")));
+				ArrayList<String> pmList = new ArrayList<>(Arrays.asList(datas.get(i).getMaxRainfall().split("%")));
+				int amRain=Integer.parseInt(amList.get(0));
+				int pmRain=Integer.parseInt(pmList.get(0));
+				String amEmoji = getEmoji(amRain);
+				String pmEmoji = getEmoji(pmRain);
+
+
 				//i. 월/일 어디어디어디어디 일정 날씨
-				System.out.println((i+1)+". "+datas.get(i).getMonth() +"/"+datas.get(i).getDay()+"  일정:"+datas.get(i).getMemo()+"  날씨:"+datas.get(i).getLowTemperature()+" / "+datas.get(i).getHighTemperature()+"  강우확율 오전:"+datas.get(i).getMinRainfall()+"  오후:"+datas.get(i).getMaxRainfall());
+				System.out.println((i+1)+". "+datas.get(i).getMonth() +"/"+datas.get(i).getDay()+"  일정:"+datas.get(i).getMemo()+"  날씨:"
+						+datas.get(i).getLowTemperature()+" / "+datas.get(i).getHighTemperature()+"  오전:"+amEmoji
+						+"  오후:"+pmEmoji);
 			}
 			else {
 				System.out.println((i+1)+". "+datas.get(i).getMonth() +"/"+datas.get(i).getDay()+"  일정:"+datas.get(i).getMemo()+"  날씨정보없음");
 			}			
 		}
+		return true;
 	}
+
 
 	///////////////////////////////////////////////////////////////////////////////
 	//// 변경할 일정 변경 로직
@@ -351,7 +440,9 @@ public class View {
 		int pk=datas.get(num-1).getpNum();
 
 		System.out.println("변경하실 일정을 입력해 주세요");
-		String dia=sc.next();
+		//넥스트라인먹여주기<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+		String dia=sc.nextLine();
+		
 
 		//객체에 pk번호 세트
 		svo.setpNum(pk);
@@ -398,12 +489,55 @@ public class View {
 	//-----------------------------------------------------------------------------------------------------------
 	// 회원 탈퇴 로직
 	public boolean getCheck(MemberVO vo) {
-		System.out.println(vo.getName()+"님, 정말 탈퇴하시겠습니까? [Y/N]");
-		String ans=sc.next();
-		if(ans.equals("Y")) {
-			return true;
+		while(true) {
+			System.out.println(vo.getName()+"님, 정말 탈퇴하시겠습니까? [Y/N]");
+			String ans = sc.next();
+			if(ans.equals("Y") ) {
+				return true;
+			}
+			else if(ans.equals("N")) {
+				return false;
+			}
 		}
-		return false;
+	}
+	//-----------------------------------------------------------------------------------------------------------
+	// 회원 변경 로직
+	public MemberVO updateMember(MemberVO vo) {
+		int num;
+		System.out.println();
+		System.out.println(vo.getName()+"님, 어떤 정보를 변경하시겠습니까?");
+
+		while(true){
+			System.out.println("1.  비밀번호");
+			System.out.println("2.  이름");
+			try {
+				num=sc.nextInt();
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("번호를 다시한번 확인해주세요."); 
+				System.out.print("입력 : ");           
+				continue;
+			}
+			if(num<1 || num>2) {
+				System.out.println("번호를 다시한번 확인해주세요.");  
+				System.out.print("입력 : ");          
+				continue;
+			}
+			break;
+		}
+
+		if(num==1) {
+			System.out.println("새로운 비밀번호를 입력해주세요.");
+			String pw=sc.next();
+			vo.setPw(pw);
+		}
+		else {
+			System.out.println("새로운 이름을 입력해주세요.");
+			String nm=sc.next();
+			vo.setName(nm);
+		}
+
+		return vo;
 	}
 
 	//--------------------------------------------------------------------------------------------
@@ -449,6 +583,8 @@ public class View {
 		int year;
 		int nowyear = now.getYear();//현재 연
 		while(true) {
+			System.out.println();
+			System.out.println();			
 			System.out.print("연도를 입력해주세요 >> ");
 			try{
 				year=sc.nextInt();
@@ -463,9 +599,7 @@ public class View {
 			}
 			break;
 		}
-
 		return year;
 	}
-
 
 }

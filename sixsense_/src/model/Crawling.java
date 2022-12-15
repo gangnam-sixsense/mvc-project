@@ -89,14 +89,14 @@ public class Crawling {
       return dongList;
       // 인자로 받은 구와 키값이 같은 밸류 배열리스트를 소트해서 리턴
    }
-   public void setWeather(ScheduleDAO sdao, ScheduleVO svo) { // 날씨를 크롤링하는 메서드
+   public void setWeather(ScheduleDAO dao2, ScheduleVO vo2) { // 날씨를 크롤링하는 메서드
       LocalDate now = LocalDate.now();
       // 오늘 날짜 now
-      LocalDate when = LocalDate.of(svo.getYear(), svo.getMonth(), svo.getDay());
+      LocalDate when = LocalDate.of(vo2.getYear(), vo2.getMonth(), vo2.getDay());
       // 인자로 받은 날짜 when
       long d = ChronoUnit.DAYS.between(now, when);
       // 오늘 날짜와 인자로 받은 날짜의 차이 d
-      String url = getSelect(svo.getDong());
+      String url = getSelect(vo2.getDong());
       // 인자로 받은 동 정보를 getSelect 메서드에 넣어서 크롤링할 url을 리턴받아온다
       Document doc = null;
       try {
@@ -108,13 +108,13 @@ public class Crawling {
       // 크롤링
       Elements lowestTemp = doc.select("#main_pack > section.sc_new.cs_weather_new._cs_weather > div._tab_flicking > div.content_wrap > div.content_area > div.inner > div > div.list_box._weekly_weather > ul > li:nth-child("+ String.valueOf(d+1) +") > div > div.cell_temperature > span > span.lowest");
       Elements highestTemp = doc.select("#main_pack > section.sc_new.cs_weather_new._cs_weather > div._tab_flicking > div.content_wrap > div.content_area > div.inner > div > div.list_box._weekly_weather > ul > li:nth-child("+ String.valueOf(d+1) +") > div > div.cell_temperature > span > span.highest");
-      Elements lowestPrec = doc.select("#main_pack > section.sc_new.cs_weather_new._cs_weather > div._tab_flicking > div.content_wrap > div.content_area > div.inner > div > div.list_box._weekly_weather > ul > li:nth-child(1) > div > div.cell_weather > span:nth-child(" + String.valueOf(d+1) + ") > span > span");
-      Elements highestPrec = doc.select("#main_pack > section.sc_new.cs_weather_new._cs_weather > div._tab_flicking > div.content_wrap > div.content_area > div.inner > div > div.list_box._weekly_weather > ul > li:nth-child(1) > div > div.cell_weather > span:nth-child(" + String.valueOf(d+1) + ") > span > span");
-      svo.setLowTemperature(lowestTemp.text()); // 최저기온
-      svo.setHighTemperature(highestTemp.text()); // 최대기온
-      svo.setMinRainfall(lowestPrec.text()); // 최저강수량
-      svo.setMaxRainfall(highestPrec.text()); // 최대강수량 세팅
-      sdao.isInputSchedule(svo); // 인자로 받은 객체의 날씨를 세팅하고 나서 DAO클래스의 plusList의 인자로 보낸다   
+      Elements lowestPrec = doc.select("#main_pack > section.sc_new.cs_weather_new._cs_weather > div._tab_flicking > div.content_wrap > div.content_area > div.inner > div > div.list_box._weekly_weather > ul > li:nth-child(" + String.valueOf(d+1) + ") > div > div.cell_weather > span:nth-child(1) > span > span");
+      Elements highestPrec = doc.select("#main_pack > section.sc_new.cs_weather_new._cs_weather > div._tab_flicking > div.content_wrap > div.content_area > div.inner > div > div.list_box._weekly_weather > ul > li:nth-child(" + String.valueOf(d+1) + ") > div > div.cell_weather > span:nth-child(2) > span > span");
+      vo2.setLowTemperature(lowestTemp.text()); // 최저기온
+      vo2.setHighTemperature(highestTemp.text()); // 최대기온
+      vo2.setMinRainfall(lowestPrec.text()); // 최저강수량
+      vo2.setMaxRainfall(highestPrec.text()); // 최대강수량 세팅
+      dao2.isInputSchedule(vo2); // 인자로 받은 객체의 날씨를 세팅하고 나서 DAO클래스의 plusList의 인자로 보낸다   
    }
    public String getSelect(String dong) { // 위치에 따른 기상예보 url을 리턴하는 메서드
       return "https://search.naver.com/search.naver?sm=tab_hty.top&where=nexearch&query="+dong+"+기상예보";
