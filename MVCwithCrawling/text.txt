@@ -1,9 +1,0 @@
-#district23 > h5
-#district23 > table > tbody > tr:nth-child(1) > td:nth-child(2)
-
-#district25 > h5
-#district25 > table > tbody > tr:nth-child(1) > td:nth-child(2)
-
-div.district.tabcont
-
-
