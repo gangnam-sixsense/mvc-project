@@ -304,11 +304,11 @@ public class View {
 			try {
 				num = sc.nextInt();
 			} catch (Exception e) {
-				e.printStackTrace();
+				sc.nextLine();
 				System.out.println("다시 입력해주세요.");
 				continue;
 			}
-			if(num<1 && num>datas.size()) {
+			if(num<1 || num>datas.size()) {
 				System.out.println("없는 번호입니다.");
 				continue;
 			}
@@ -387,7 +387,6 @@ public class View {
 			try {
 				num = sc.nextInt();
 			} catch (Exception e) {
-				e.printStackTrace();
 				System.out.println("번호를 다시한번 확인해주세요.");
 				continue;
 			}
@@ -402,10 +401,10 @@ public class View {
 		//실질적인 데이터의 pk값 대입
 		int pk=datas.get(num-1).getpNum();
 
-		System.out.println("변경하실 일정을 입력해 주세요");
+		System.out.println("변경하실 일정메모를 입력해 주세요");
 		sc.nextLine();
 		String dia=sc.nextLine();
-		
+
 
 		//객체에 pk번호 세트
 		svo.setpNum(pk);
@@ -425,7 +424,6 @@ public class View {
 			try {
 				num = sc.nextInt();
 			} catch (Exception e) {
-				e.printStackTrace();
 				System.out.println("번호를 다시한번 확인해주세요.");            
 				continue;
 			}
@@ -476,7 +474,6 @@ public class View {
 			try {
 				num=sc.nextInt();
 			} catch (Exception e) {
-				e.printStackTrace();
 				System.out.println("번호를 다시한번 확인해주세요."); 
 				System.out.print("입력 : ");           
 				continue;
