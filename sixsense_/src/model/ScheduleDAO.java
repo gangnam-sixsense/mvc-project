@@ -12,14 +12,12 @@ public class ScheduleDAO {
 
 	}
 
-	public void deleteSchedule(MemberVO vo) {
-		ArrayList<ScheduleVO> newSvo = new ArrayList<>();
+	public void MemberDeleteScheduleAll(MemberVO vo) {
 		for(int i = 0; i < svo.size(); i++) {
 			if(!vo.getID().equals(svo.get(i).getID())) {
-				newSvo.add(svo.get(i));
+				svo.remove(i--);
 			}
 		}
-		svo = newSvo;
 	}
 	//C
 	public boolean isInputSchedule(ScheduleVO vo) { //일정 추가. 날짜 메모입력 받고 PK는 여기서 설정. 날씨는 안 받음.
@@ -27,9 +25,6 @@ public class ScheduleDAO {
 		ScheduleVO data = new ScheduleVO(); //?
 		data = vo;
 		data.setpNum(PK++); //PK
-		//data.setDate(vo.getDate());//날짜
-		//data.setMemo(vo.getMemo());//메모  PK만 받으면됨
-		//data.setWeather(vo.getWeather()); //크롤링에서 값을 넘겨받아야한다.
 		svo.add(data);
 		return true;
 		}catch (Exception e) {

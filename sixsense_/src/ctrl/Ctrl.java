@@ -145,7 +145,7 @@ public class Ctrl {
 						else if(act==6) { // 5. 회원탈퇴
 							if(view.getCheck(mvo)) {
 								if(mdao.isDeleteMember(mvo)) {
-									sdao.deleteSchedule(mvo);
+									sdao.MemberDeleteScheduleAll(mvo);
 									view.printTrue();
 									break;
 								}
