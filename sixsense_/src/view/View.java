@@ -157,7 +157,7 @@ public class View {
 		while(true) {
 			System.out.println("구를 입력해주세요");
 			System.out.print("입력 : ");
-			gu=sc.next();
+			gu=sc.nextLine();
 			for(int i=0;i<datas.size();i++) {
 				if(datas.get(i).equals(gu)) {
 					flag=true;
@@ -182,7 +182,7 @@ public class View {
 		while(true) {
 			System.out.println("동을 입력해주세요");
 			System.out.print("입력 : ");
-			dong=sc.next();
+			dong=sc.nextLine();
 			for(int i=0;i<datas.size();i++) {
 				if(datas.get(i).equals(dong)) {
 					flag=true;
