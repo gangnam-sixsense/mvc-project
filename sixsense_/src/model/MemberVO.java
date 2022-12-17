@@ -30,5 +30,5 @@ public class MemberVO {
 		this.pw=pw;
 		this.name=name;
 	}
-	
+
 }

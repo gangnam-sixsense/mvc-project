@@ -198,32 +198,32 @@ public class View {
 		return dong;
 	}
 	//-----------------------------------------------------------------
-		//연도 입력 로직
-		public int year() {
-			LocalDate now = LocalDate.now();
-			int year;
-			int nowyear = now.getYear();//현재 연도
-			while(true) {
-				System.out.println();
-				System.out.println("[주간예보]");
-				System.out.println("금일부터 10일 이내로 입력해주세요 : D");
-				System.out.println("⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯ 일정 연도 입력  ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯");
-				System.out.print("   :::   ");
-				try{
-					year=sc.nextInt();
-				}catch(Exception e){
-					sc.nextLine();
-					System.out.println("✖︎ ✖︎  입력하신 연도를 다시 확인해주세요!  ✖ ︎✖");
-					continue;
-				}
-				if(year<nowyear) { //현재 연보다 작을경우 컨티뉴
-					System.out.println("✖︎ ✖︎  입력하신 연도를 다시 확인해주세요!  ✖ ︎✖");
-					continue;
-				}
-				break;
+	//연도 입력 로직
+	public int year() {
+		LocalDate now = LocalDate.now();
+		int year;
+		int nowyear = now.getYear();//현재 연도
+		while(true) {
+			System.out.println();
+			System.out.println("[주간예보]");
+			System.out.println("금일부터 10일 이내로 입력해주세요 : D");
+			System.out.println("⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯ 일정 연도 입력  ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯");
+			System.out.print("   :::   ");
+			try{
+				year=sc.nextInt();
+			}catch(Exception e){
+				sc.nextLine(); //에러값을 먹어준다
+				System.out.println("✖︎ ✖︎  입력하신 연도를 다시 확인해주세요!  ✖ ︎✖");
+				continue;
 			}
-			return year;
+			if(year<nowyear) { //현재 연보다 작을경우 컨티뉴
+				System.out.println("✖︎ ✖︎  입력하신 연도를 다시 확인해주세요!  ✖ ︎✖");
+				continue;
+			}
+			break;
 		}
+		return year;
+	}
 	///////////////////////////////////////////////////////////
 	/// 일정 월 입력 로직
 	public int mon(int year) {
@@ -235,6 +235,7 @@ public class View {
 			try {
 				mon=sc.nextInt();
 			}catch (Exception e) {
+				sc.nextLine(); //에러값을 먹어준다
 				System.out.println("✖︎ ✖︎  입력하신 월을 다시 확인해주세요!  ✖ ︎✖");
 				continue;
 			}
@@ -265,6 +266,7 @@ public class View {
 			try {
 				day=sc.nextInt();
 			}catch (Exception e) {
+				sc.nextLine(); //에러값을 먹어준다
 				System.out.println("✖︎ ✖︎  입력하신 일을 다시 확인해주세요!  ✖ ︎✖");
 				continue;
 			}
@@ -324,10 +326,10 @@ public class View {
 	}
 	////////////////////일정 등록 성공로직
 	//---------------------------------------------------------------------------------
-		public void scheduleTrue() { // 
-			System.out.println();
-			System.out.println("일정이 등록되었습니다! : D");
-		}
+	public void scheduleTrue() { // 
+		System.out.println();
+		System.out.println("일정이 등록되었습니다! : D");
+	}
 	//////////////////////////////////////
 	/// 일정 삭제 로직
 	public int deleteNum(ArrayList<ScheduleVO> datas) {//인자필요 일정객체배열리스트
@@ -338,7 +340,7 @@ public class View {
 			try {
 				num = sc.nextInt();
 			} catch (Exception e) {
-				sc.nextLine();
+				sc.nextLine(); //에러값을 먹어준다
 				System.out.println("✖︎ ✖︎  삭제하실 일정을 다시 확인해주세요!  ✖ ︎✖");
 				continue;
 			}
@@ -358,26 +360,26 @@ public class View {
 	//// 일정 전체 출력 로직
 
 	public String getEmoji(int rain, String temp) {
-        String emoji = "";
-        if(rain<=30) {
-           emoji= "☀︎";
-        }
-        else if(rain<=70) {
-           emoji="☁";
-        }
-        else {
-           ArrayList<String> alTemp_ = new ArrayList<>(Arrays.asList(temp.split("기온")));
-           ArrayList<String> alTemp = new ArrayList<>(Arrays.asList(alTemp_.get(1).split("°")));
-           int intTemp = Integer.parseInt(alTemp.get(0));
-           if(intTemp > 0) {
-              emoji="☂︎";
-           }
-           else {
-              emoji="☃︎";
-           }
-        }
-        return emoji;
-     }
+		String emoji = "";
+		if(rain<=30) {
+			emoji= "☀︎";
+		}
+		else if(rain<=70) {
+			emoji="☁";
+		}
+		else {
+			ArrayList<String> alTemp_ = new ArrayList<>(Arrays.asList(temp.split("기온")));
+			ArrayList<String> alTemp = new ArrayList<>(Arrays.asList(alTemp_.get(1).split("°")));
+			int intTemp = Integer.parseInt(alTemp.get(0));
+			if(intTemp > 0) {
+				emoji="☂︎";
+			}
+			else {
+				emoji="☃︎";
+			}
+		}
+		return emoji;
+	}
 	/////////////////////////////////////////////////////////////////////
 	//////////// 관리자 일정 출력 
 	public boolean adminselectAll(ArrayList<ScheduleVO> datas) {
@@ -387,93 +389,94 @@ public class View {
 		}
 		/*전체 출력*/
 		for(int i=0;i<datas.size();i++) {
-			
+
 			if(!datas.get(i).getLowTemperature().isEmpty()) {
-				
+
 				if(datas.get(i).getMinRainfall().isEmpty()) {
 					datas.get(i).setMinRainfall("0");
 				}
 				if(datas.get(i).getMaxRainfall().isEmpty()) {
 					datas.get(i).setMaxRainfall("0");
 				}
-				
+
 				ArrayList<String> amList = new ArrayList<>(Arrays.asList(datas.get(i).getMinRainfall().split("%")));
 				ArrayList<String> pmList = new ArrayList<>(Arrays.asList(datas.get(i).getMaxRainfall().split("%")));
 				int amRain=Integer.parseInt(amList.get(0));
 				int pmRain=Integer.parseInt(pmList.get(0));
 				String amEmoji = getEmoji(amRain, datas.get(i).getLowTemperature());
 				String pmEmoji = getEmoji(pmRain, datas.get(i).getLowTemperature());
-				
-				
+
+
 				//i. 월/일 어디어디어디어디 일정 날씨
-				 System.out.println((i+1)+". [ "+datas.get(i).getID()+"  /  "+datas.get(i).getMonth() +"월"+datas.get(i).getDay()+"일 ] \n     " +datas.get(i).getGu()+" "+datas.get(i).getDong()+"\n     "
-			             +datas.get(i).getLowTemperature()+" / "+datas.get(i).getHighTemperature()+"  오전:"+amEmoji+ "  오후:"+pmEmoji+"\n     📄 "+datas.get(i).getMemo() + " ⌟ ");
-			              System.out.println();
+				System.out.println((i+1)+". [ "+datas.get(i).getID()+"  /  "+datas.get(i).getMonth() +"월"+datas.get(i).getDay()+"일 ] \n     " +datas.get(i).getGu()+" "+datas.get(i).getDong()+"\n     "
+						+datas.get(i).getLowTemperature()+" / "+datas.get(i).getHighTemperature()+"  오전:"+amEmoji+ "  오후:"+pmEmoji+"\n     📄 "+datas.get(i).getMemo() + " ⌟ ");
+				System.out.println();
 			}
 			else {
-				  System.out.println((i+1)+".  [ "+datas.get(i).getMonth() +"월"+datas.get(i).getDay()+"일 ]"+" \n      📄"+datas.get(i).getMemo()+" ⌟\n      제공되는 날씨 정보 없음");
-	              System.out.println();			}         
+				System.out.println((i+1)+".  [ "+datas.get(i).getMonth() +"월"+datas.get(i).getDay()+"일 ]"+" \n      📄"+datas.get(i).getMemo()+" ⌟\n      제공되는 날씨 정보 없음");
+				System.out.println();			}         
 		}
 		return true;
 	}
 	//////////////////////////////////////////////////////////////////
 	/////회원 일정 전체출력
-     public boolean selectAll(ArrayList<ScheduleVO> datas) {
-        if(datas.isEmpty()) {
-           System.out.println("아직 일정이 없습니다.");
-           return false;
-        }
-        /*전체 출력*/
-        for(int i=0;i<datas.size();i++) {
+	public boolean selectAll(ArrayList<ScheduleVO> datas) {
+		if(datas.isEmpty()) {
+			System.out.println("아직 일정이 없습니다.");
+			return false;
+		}
+		/*전체 출력*/
+		for(int i=0;i<datas.size();i++) {
 
-           if(!datas.get(i).getLowTemperature().isEmpty()) {
+			if(!datas.get(i).getLowTemperature().isEmpty()) {
 
-              if(datas.get(i).getMinRainfall().isEmpty()) {
-                 datas.get(i).setMinRainfall("0");
-              }
-              if(datas.get(i).getMaxRainfall().isEmpty()) {
-                 datas.get(i).setMaxRainfall("0");
-              }
+				if(datas.get(i).getMinRainfall().isEmpty()) {
+					datas.get(i).setMinRainfall("0");
+				}
+				if(datas.get(i).getMaxRainfall().isEmpty()) {
+					datas.get(i).setMaxRainfall("0");
+				}
 
-              ArrayList<String> amList = new ArrayList<>(Arrays.asList(datas.get(i).getMinRainfall().split("%")));
-              ArrayList<String> pmList = new ArrayList<>(Arrays.asList(datas.get(i).getMaxRainfall().split("%")));
-              int amRain=Integer.parseInt(amList.get(0));
-              int pmRain=Integer.parseInt(pmList.get(0));
-              String amEmoji = getEmoji(amRain, datas.get(i).getLowTemperature());
-              String pmEmoji = getEmoji(pmRain, datas.get(i).getLowTemperature());
+				ArrayList<String> amList = new ArrayList<>(Arrays.asList(datas.get(i).getMinRainfall().split("%")));
+				ArrayList<String> pmList = new ArrayList<>(Arrays.asList(datas.get(i).getMaxRainfall().split("%")));
+				int amRain=Integer.parseInt(amList.get(0));
+				int pmRain=Integer.parseInt(pmList.get(0));
+				String amEmoji = getEmoji(amRain, datas.get(i).getLowTemperature());
+				String pmEmoji = getEmoji(pmRain, datas.get(i).getLowTemperature());
 
 
-              //i. 월/일 어디어디어디어디 일정 날씨
-              System.out.println((i+1)+". [ "+datas.get(i).getMonth() +"월"+datas.get(i).getDay()+"일 ] \n     " +datas.get(i).getGu()+" "+datas.get(i).getDong()+"\n     "
-             +datas.get(i).getLowTemperature()+" / "+datas.get(i).getHighTemperature()+"  오전:"+amEmoji+ "  오후:"+pmEmoji+"\n     📄 "+datas.get(i).getMemo() + " ⌟ ");
-              System.out.println();
-           }
-           else {
-              System.out.println((i+1)+".  [ "+datas.get(i).getMonth() +"월"+datas.get(i).getDay()+"일 ]"+" \n      📄"+datas.get(i).getMemo()+" ⌟\n      제공되는 날씨 정보 없음");
-              System.out.println();
-           }         
-        }
-        return true;
-     }
+				//i. 월/일 어디어디어디어디 일정 날씨
+				System.out.println((i+1)+". [ "+datas.get(i).getMonth() +"월"+datas.get(i).getDay()+"일 ] \n     " +datas.get(i).getGu()+" "+datas.get(i).getDong()+"\n     "
+						+datas.get(i).getLowTemperature()+" / "+datas.get(i).getHighTemperature()+"  오전:"+amEmoji+ "  오후:"+pmEmoji+"\n     📄 "+datas.get(i).getMemo() + " ⌟ ");
+				System.out.println();
+			}
+			else {
+				System.out.println((i+1)+".  [ "+datas.get(i).getMonth() +"월"+datas.get(i).getDay()+"일 ]"+" \n      📄"+datas.get(i).getMemo()+" ⌟\n      제공되는 날씨 정보 없음");
+				System.out.println();
+			}         
+		}
+		return true;
+	}
 
 	///////////////////////////////////////////////////////////////////////////////
 	//// 변경할 일정 변경 로직
-	public ScheduleVO changeDiary(ArrayList<ScheduleVO>datas) {
-
-		System.out.println("⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯ 변경 일정 입력  ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯");
-		System.out.print("   :::   ");
-		int num;
+	public ScheduleVO changeDiary(ArrayList<ScheduleVO>datas) { 
+		System.out.println("⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯");
+		System.out.println("변경하실 일정번호를 입력해주세요");
+		System.out.print("입력 : ");
+		int pknum;
 		while(true) {
 			int len;         
 			len=datas.size();
 			try {
-				num = sc.nextInt();
+				pknum = sc.nextInt();
 			} catch (Exception e) {
-				System.out.println("✖︎ ✖︎ 변경하실 일정을 다시 확인해주세요!  ✖ ︎✖");
+				sc.nextLine(); //에러값을 먹어준다
+				System.out.println("번호를 다시한번 확인해주세요.");
 				continue;
 			}
-			if(num<1 || num>len) {
-				System.out.println("✖︎ ✖︎ 변경하실 일정을 다시 확인해주세요!  ✖ ︎✖");
+			if(pknum<1 || pknum>len) {
+				System.out.println("번호를 다시한번 확인해주세요.");
 				continue;
 			}
 			break;
@@ -481,17 +484,43 @@ public class View {
 
 		ScheduleVO svo=new ScheduleVO();
 		//실질적인 데이터의 pk값 대입
-		int pk=datas.get(num-1).getpNum();
+		int pk=datas.get(pknum-1).getpNum();
 
-		System.out.println("✖︎ ✖︎ 변경할 메모을 다시 확인해주세요!  ✖ ︎✖");
-		sc.nextLine();
-		String dia=sc.nextLine();
+		int num;
+		while(true) {
+			System.out.println("⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯");
+			System.out.println("1.메모변경 2.날짜변경");
+			try {
+				num = sc.nextInt();
+			} catch (Exception e) {
+				sc.nextLine(); //에러값을 먹어준다
+				System.out.println("번호를 다시한번 확인해주세요.");
+				continue;
+			}
+			if(num<1 || num>2) {
+				System.out.println("번호를 다시한번 확인해주세요.");
+				continue;
+			}
+			break;
+		}
 
+		if(num == 1) {
+			System.out.println("변경하실 일정메모를 입력해 주세요");
+			sc.nextLine();
+			String dia=sc.nextLine();
+			//객체에 pk번호 세트
+			svo.setpNum(pk);
+			//객체에 새로운 일정세트
+			svo.setMemo(dia);;
+		}
 
-		//객체에 pk번호 세트
-		svo.setpNum(pk);
-		//객체에 새로운 일정세트
-		svo.setMemo(dia);;
+		else if(num == 2){
+			svo.setYear(year());
+			svo.setMonth(mon(svo.getYear()));
+			svo.setDay(day(svo.getYear(), svo.getMonth()));
+			svo.setDong(datas.get(pknum-1).getDong());
+			svo.setpNum(pk);
+		}
 		return svo;
 	}
 
@@ -506,6 +535,7 @@ public class View {
 			try {
 				num = sc.nextInt();
 			} catch (Exception e) {
+				sc.nextLine(); //에러값을 먹어준다
 				System.out.println("✖︎ ✖︎ 삭제하실 일정을 다시 확인해주세요!  ✖ ︎✖");
 				continue;
 			}
@@ -557,6 +587,7 @@ public class View {
 			try {
 				num=sc.nextInt();
 			} catch (Exception e) {
+				sc.nextLine(); //에러값을 먹어준다
 				System.out.println("✖︎ ✖︎ 번호를 다시 확인해주세요!  ✖ ︎✖"); 
 				System.out.print("   :::   ");           
 				continue;
@@ -583,11 +614,11 @@ public class View {
 		return vo;
 	}
 
-	
+
 	//--------------------------------------------------------------------------------------------
 	// 일정변경 성공
 	public void scheduleChangeTrue() {
-		System.out.println("✖︎ ✖︎ 일정이 변경되지 않았습니다!  ✖ ︎✖");
+		System.out.println("일정을 변경 완료하였습니다 :D");
 	}
 	//--------------------------------------------------------------------------------------------
 	// 일정변경 실패
@@ -651,8 +682,8 @@ public class View {
 		}
 		return act;
 	}
-	
-	
-	
+
+
+
 
 }
