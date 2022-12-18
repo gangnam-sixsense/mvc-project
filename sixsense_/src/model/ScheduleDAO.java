@@ -12,13 +12,14 @@ public class ScheduleDAO {
 
 	}
 
-	public void memberDeleteScheduleAll(MemberVO vo) {
+	public void memberDeleteScheduleAll(MemberVO vo) { // 
 		for(int i = 0; i < svo.size(); i++) {
-			if(!vo.getID().equals(svo.get(i).getID())) {
-				svo.remove(i--);
+			if(vo.getID().equals(svo.get(i).getID())) { // 동일 아이디 체크
+				svo.remove(i--); // 연속으로 같은 아이디일때 일정삭제를 위한 i--
 			}
 		}
 	}
+	
 	//C
 	public boolean isInputSchedule(ScheduleVO vo) { //일정 추가. 날짜 메모입력 받고 PK는 여기서 설정. 날씨는 안 받음.
 		try {
@@ -54,47 +55,23 @@ public class ScheduleDAO {
 		}
 		return null; //PK가 없다면 null을 반환한다.
 	}
-	//U
-	//   public boolean isModifySchedule(ScheduleVO vo) { //일정 변경.
-	//      for(int i=0; i<svo.size(); i++) { //리스트 size만큼 돌아서.
-	//         if(svo.get(i).getpNum()==vo.getpNum()) { //PK값이 맞다면.
-	//            if(vo.getMemo() != null) { //메모가 null이 아니라면.
-	//               svo.get(i).setMemo(vo.getMemo()); //메모가 변경된다.
-	//               return true; //true 리턴해준다.
-	//            }else if(vo.getYear() != 0) { //년이 0이 아니라면.
-	//               if(vo.getMonth() !=0) { //달이 0이 아니라면.
-	//                  if(vo.getDay() !=0) { //일이 0이 아니라면.
-	//                     svo.get(i).setYear(vo.getYear()); //년을 바꿔주고.
-	//                     svo.get(i).setMonth(vo.getMonth());  // 달을 바꿔주고.
-	//                     svo.get(i).setDay(vo.getDay()); //일을 바꿔준다.
-	//                     return true; //true를 리턴해준다.
-	//                  }
-	//               }
-	//            }
-	//         }
-	//      }
-	//      return false; //false를 리턴해준다.
-	//   }
 
-	public boolean isModifySchedule(ScheduleVO vo) { //일정 변경. <<<<<<<<<<<<<<<<<<이슬추가!!!!!!!!!!
+	//U
+	public boolean isModifySchedule(ScheduleVO vo) { //일정 변경. 
 		for(int i=0; i<svo.size(); i++) { //리스트 size만큼 돌아서.
 			if(svo.get(i).getpNum()==vo.getpNum()) { //PK값이 맞다면.
 				if(vo.getMemo() != null) { //메모가 null이 아니라면.
 					svo.get(i).setMemo(vo.getMemo()); //메모가 변경된다.
 					return true; //true 리턴해준다.
-				}else if(vo.getYear() != 0) { //년이 0이 아니라면.
-					if(vo.getMonth() !=0) { //달이 0이 아니라면.
-						if(vo.getDay() !=0) { //일이 0이 아니라면.
-							svo.get(i).setYear(vo.getYear()); //년을 바꿔주고.
-							svo.get(i).setMonth(vo.getMonth());  // 달을 바꿔주고.
-							svo.get(i).setDay(vo.getDay()); //일을 바꿔준다.
-							svo.get(i).setLowTemperature(vo.getLowTemperature());
-							svo.get(i).setHighTemperature(vo.getHighTemperature());
-							svo.get(i).setMinRainfall(vo.getMinRainfall());
-							svo.get(i).setMaxRainfall(vo.getMaxRainfall());
-							return true; //true를 리턴해준다.
-						}
-					}
+				}else {
+					svo.get(i).setYear(vo.getYear()); //년을 바꿔주고.
+					svo.get(i).setMonth(vo.getMonth());  // 달을 바꿔주고.
+					svo.get(i).setDay(vo.getDay()); //일을 바꿔준다.
+					svo.get(i).setLowTemperature(vo.getLowTemperature());
+					svo.get(i).setHighTemperature(vo.getHighTemperature());
+					svo.get(i).setAmRainfall(vo.getAmRainfall());
+					svo.get(i).setPmRainfall(vo.getPmRainfall());
+					return true; //true를 리턴해준다.
 				}
 			}
 		}

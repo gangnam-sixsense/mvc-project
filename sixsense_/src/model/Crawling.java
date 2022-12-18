@@ -15,7 +15,7 @@ import java.time.temporal.ChronoUnit;
 
 public class Crawling {
 
-   private Map<String, ArrayList<String>> map = new HashMap<>(); // 멤버변수 map
+   private Map<String, ArrayList<String>> map; // 멤버변수 map
    // 강남구 : [신사동, 압구정동, ... ]
    // 강동구 : [강일동, 상일동, ...]
    // ... 와 같이 키값은 구, 밸류값은 동리스트로 이루어져 있는 맵을 저장할 공간
@@ -82,13 +82,13 @@ public class Crawling {
       // 맵의 키값들을 뽑아서 배열리스트에 저장 후 소트해서 리턴
    }
    public ArrayList<String> getDong(String gu){ // 동 리스트를 리턴하는 메서드
-      ArrayList<String> dongList = new ArrayList<String>(map.get(gu));
+      ArrayList<String> dongList = map.get(gu);
       Collections.sort(dongList);
       return dongList;
       // 인자로 받은 구와 키값이 같은 밸류 배열리스트를 소트해서 리턴
    }
-   public boolean setWeather(ScheduleDAO sdao, ScheduleVO svo) { // 날씨를 크롤링하여 svo에 저장 후 sdao로 보내는 메서드 // 이스ㅡ르르리아ㅡㄹ이ㅏㄹ
-      if(svo.getDong() != null) {
+   public boolean setWeather(ScheduleDAO sdao, ScheduleVO svo) { // 날씨를 크롤링하여 svo에 저장 후 sdao로 보내는 메서드
+      if(svo.getDay() != 0) { 
          LocalDate now = LocalDate.now();
          // 오늘 날짜 now
          LocalDate when = LocalDate.of(svo.getYear(), svo.getMonth(), svo.getDay());
@@ -108,20 +108,19 @@ public class Crawling {
          String bday = String.valueOf(betweenDay + 1);
          Elements lowestTemp = doc.select("li:nth-child("+ bday +") > div > div.cell_temperature > span > span.lowest");
          Elements highestTemp = doc.select("li:nth-child("+ bday +") > div > div.cell_temperature > span > span.highest");
-         Elements lowestPrec = doc.select("li:nth-child(" + bday + ") > div > div.cell_weather > span:nth-child(1) > span > span");
-         Elements highestPrec = doc.select("li:nth-child(" + bday + ") > div > div.cell_weather > span:nth-child(2) > span > span");
+         Elements amRainfall = doc.select("li:nth-child(" + bday + ") > div > div.cell_weather > span:nth-child(1) > span > span");
+         Elements pmRainfall = doc.select("li:nth-child(" + bday + ") > div > div.cell_weather > span:nth-child(2) > span > span");
          svo.setLowTemperature(lowestTemp.text()); // 최저기온
          svo.setHighTemperature(highestTemp.text()); // 최대기온
-         svo.setMinRainfall(lowestPrec.text()); // 최저강수량
-         svo.setMaxRainfall(highestPrec.text()); // 최대강수량 세팅
+         svo.setAmRainfall(amRainfall.text()); // 오전강수량
+         svo.setPmRainfall(pmRainfall.text()); // 오후강수량 세팅
       }
-      if(svo.getpNum() == 0) {
+      if(svo.getpNum() == 0) { // 일정추가
          sdao.isInputSchedule(svo); // 인자로 받은 객체의 날씨를 세팅하고 나서 DAO클래스의 일정추가 메서드의 인자로 보낸다
-         return true;
       }
-      else {
+      else { // 일정변경
          sdao.isModifySchedule(svo);
-         return true;
       }
+      return true;
    }
 }

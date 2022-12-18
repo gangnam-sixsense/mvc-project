@@ -9,10 +9,10 @@ import view.View;
 
 // 컨트롤은 모델과 뷰를 멤버변수로 가짐
 public class Ctrl { 
-	View view;
-	MemberDAO mdao;
-	ScheduleDAO sdao;
-	Crawling crawling;
+	private View view;
+	private MemberDAO mdao;
+	private ScheduleDAO sdao;
+	private Crawling crawling;
 
 	public Ctrl() { // 생성자
 		// DAO를 다 만들고나서 크롤링만드는것 맞는것
@@ -62,10 +62,10 @@ public class Ctrl {
 								// sdao의 삭제메서드로 svo넘겨줌
 								svo.setpNum(view.deleteNum(sdao.loadSchedules(null)));   
 								if(sdao.isDeleteSchedule(svo)) { // 삭제 성공한다면
-									view.scheduleDeletTrue(); // 성공멘트출력
+									view.scheduleDeleteTrue(); // 성공멘트출력
 								}
 								else {
-									view.scheduleDeletFalse(); // 실패멘트출력
+									view.scheduleDeleteFalse(); // 실패멘트출력
 								}
 							}
 						}
@@ -89,11 +89,11 @@ public class Ctrl {
 							svo.setID(mvo.getID()); // 회원ID를 일정vo에 FK로 세팅
 							svo.setMemo(view.diary()); // 일정추가
 
-							// 크롤링에서 구리스트 반환 - 뷰에서 출력, 선택, 세팅
-							// 세팅된 구를 크롤링 동에 넘겨주고 - 동 리스트 반환 - 뷰에서 출력, 선택 - 선택된 동 세팅
+							// 크롤링에서 구리스트 반환 - 뷰에서 출력, 선택된 값으로 세팅
+							// 세팅된 구를 크롤링 동에 넘겨주고 - 동 리스트 반환 - 뷰에서 출력, 선택된 값으로 세팅
 							svo.setGu(view.gu(crawling.getGu())); // 구 저장 
 							svo.setDong(view.dong(crawling.getDong(svo.getGu())));
-							// 스케줄리스트를 가지고있는 객체과 일정세팅된 객체 크롤링으로 보냄 -크롤링에서 dao로 전달
+							// 스케줄리스트를 가지고있는 객체와 일정세팅된 객체 크롤링으로 보냄 -크롤링에서 dao로 전달
 							crawling.setWeather(sdao ,svo); // 세팅된 객체를 크롤링으로 보냄
 							view.scheduleTrue(); // 일정등록 성공 
 						}
@@ -105,13 +105,13 @@ public class Ctrl {
 						else if(act==3){ //3.일정 변경
 							// 로그인한 mvo넘겨주고 해당 회원의 일정리스트를 뷰에게 전달후 출력 
 							if(view.selectAll(sdao.loadSchedules(mvo))) {
-								// sdao에서 회원의 일정리스트를 뷰에게 전달 - 변경할 일정을 sdao에 전달 - 변경								
+								// sdao에서 회원의 일정리스트를 뷰에게 전달 - 변경할 일정과 sdao를 크롤링에 넘겨주고 세팅								
 								if(crawling.setWeather(sdao, view.changeDiary(sdao.loadSchedules(mvo)))) { // 변경성공한다면 
 
 									view.scheduleChangeTrue(); // 성공멘트출력
 								}
 								else {
-									view.scheduleChangeFrue();; // 실패멘트출력
+									view.scheduleChangeFalse();; // 실패멘트출력
 								}
 							}
 						}
@@ -125,30 +125,31 @@ public class Ctrl {
 								svo.setpNum(view.deleteNum(sdao.loadSchedules(mvo)));
 								//                  System.out.println(view.deleteNum(sdao.loadSchedules(mvo)));
 								if(sdao.isDeleteSchedule(svo)) { // 해당 일정 삭제 성공한다면
-									view.scheduleDeletTrue(); // 성공멘트출력
+									view.scheduleDeleteTrue(); // 성공멘트출력
 								}
 								else {
-									view.scheduleDeletFalse(); // 실패멘트출력
+									view.scheduleDeleteFalse(); // 실패멘트출력
 								}
 							}
 						}
 						else if(act==5) { // 5. 회원변경
-							if(mdao.isModifyMember(view.updateMember(mvo))) {
-								view.memberChangeTrue();
+							// 뷰에서 변경할정보를 입력받고 세팅된 vo를 모델로 보내서 확인 후 변경
+							if(mdao.isModifyMember(view.updateMember(mvo))) { // 변경성공한다면
+								view.memberChangeTrue(); // 성공멘트출력
 								break;
 							}
-							view.memberChangeFalse();
+							view.memberChangeFalse(); // 실패멘트출력
 
 						}
-						else if(act==6) { // 5. 회원탈퇴
-							if(view.getCheck(mvo)) {
-								if(mdao.isDeleteMember(mvo)) {
-									sdao.memberDeleteScheduleAll(mvo);
-									view.memberDeletTrue();
+						else if(act==6) { // 6. 회원탈퇴
+							if(view.getCheck(mvo)) { // 탈퇴여부 입력받고 반환
+								if(mdao.isDeleteMember(mvo)) { // ID확인후 회원삭제 성공한다면
+									sdao.memberDeleteScheduleAll(mvo); // ID확인후 삭제
+									view.memberDeleteTrue(); // 탈퇴성공멘트출력
 									break;
 								}
 							} 
-							view.memberDeletFalse();
+							view.memberDeleteFalse(); // 탈퇴실패멘트출력
 						}
 						else{
 							break; // 로그인반복문 탈출하고 메인메뉴로

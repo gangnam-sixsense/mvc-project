@@ -7,8 +7,8 @@ public class ScheduleVO {
 	private int day; //일.
 	private String highTemperature; //최고기온.
 	private String lowTemperature; //최저기온.
-	private String maxRainfall; //최대 강우량.
-	private String minRainfall; //최소 강우량.
+	private String pmRainfall; //최대 강우량.
+	private String amRainfall; //최소 강우량.
 	private String memo;
 	private String ID; //FK
 	private int pNum; //PK
@@ -70,17 +70,18 @@ public class ScheduleVO {
 	public void setLowTemperature(String lowTemperature) {
 		this.lowTemperature = lowTemperature;
 	}
-	public String getMaxRainfall() {
-		return maxRainfall;
+	
+	public String getPmRainfall() {
+		return pmRainfall;
 	}
-	public void setMaxRainfall(String maxRainfall) {
-		this.maxRainfall = maxRainfall;
+	public void setPmRainfall(String pmRainfall) {
+		this.pmRainfall = pmRainfall;
 	}
-	public String getMinRainfall() {
-		return minRainfall;
+	public String getAmRainfall() {
+		return amRainfall;
 	}
-	public void setMinRainfall(String minRainfall) {
-		this.minRainfall = minRainfall;
+	public void setAmRainfall(String amRainfall) {
+		this.amRainfall = amRainfall;
 	}
 	public String getGu() {
 		return gu;

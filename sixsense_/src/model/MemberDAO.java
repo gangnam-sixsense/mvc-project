@@ -22,7 +22,7 @@ public class MemberDAO {
 		data.setPw(vo.getPw()); //MemberVO의 비밀번호를 설정해준다.
 		mvo.add(vo);
 		return true; //같은 아이디가 존재하지 않다면 true 반환 
-		//ㄴ???
+		
 	}
 	//R
 	public MemberVO hasMember(MemberVO vo) {// 로그인 로직
@@ -54,7 +54,7 @@ public class MemberDAO {
 	//D
 	public boolean isDeleteMember(MemberVO vo) { // 회원 탈퇴.
 		for(int i=0; i<mvo.size(); i++) { //리스트size만큼 돌아서.
-			if(mvo.get(i).getID().equals(vo.getID())) { //비밀번호가 맞다면 if문 실행
+			if(mvo.get(i).getID().equals(vo.getID())) { //ID가 맞다면 if문 실행
 				mvo.remove(i);  //삭제.
 				return true; //true 반환
 			}
